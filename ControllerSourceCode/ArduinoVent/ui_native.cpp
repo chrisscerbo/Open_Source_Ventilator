@@ -386,7 +386,7 @@ void CUiNative::updateParams()
   }
 }
 
-void CUiNative::scroolParams( bool down)
+void CUiNative::scrollParams( bool down)
 {
     if (down) {
       params_idx++;
@@ -421,7 +421,7 @@ void CUiNative::checkFuncHold()
     if (check_decrement_hold) {
       if (halCheckTimerExpired(tm_decrement_hold, TM_FUNC_HOLD)) {
         params_idx = -1;
-        scroolParams(true);
+        scrollParams(true);
       }
     }
 }
@@ -443,7 +443,7 @@ propagate_t CUiNative::onEvent(event_t * event)
                     ignore_release--;
                     return PROPAGATE;
                 }
-                // scroolParams(true);
+                // scrollParams(true);
                 check_set_hold = false;
             }
             else if (event->type == EVT_KEY_PRESS) {
@@ -459,7 +459,7 @@ propagate_t CUiNative::onEvent(event_t * event)
         //------------- Decrement key --------------
         if (event->iParam == KEY_DECREMENT) {
             if (event->type == EVT_KEY_PRESS)  {
-              scroolParams(false);
+              scrollParams(false);
               tm_decrement_hold = halStartTimerRef();
               check_decrement_hold = true;
             }
@@ -470,7 +470,7 @@ propagate_t CUiNative::onEvent(event_t * event)
 
         //------------- increment key --------------
         if (event->iParam == KEY_INCREMENT && event->type == EVT_KEY_PRESS)  {
-            scroolParams(true);
+            scrollParams(true);
         }
     }
 
